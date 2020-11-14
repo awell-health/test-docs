@@ -4,9 +4,11 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "build:doc-tests": "npm run build && ./node_modules/.bin/babel --config-file ./.babelrc.test src --out-dir test",
+    "build": "./node_modules/.bin/babel --config-file ./.babelrc.build src --out-dir dist",
+    "test:doc-tests": "npm run build:doc-tests && node ./test/index.js",
     "test:e2e": "npm run build && ./node_modules/.bin/babel --config-file ./.babelrc.test test-dir --out-dir test-dir-o",
-    "build": "./node_modules/.bin/babel --config-file ./.babelrc.build src --out-dir lib",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest ./src --watchAll",
+    "test:jest": "NODE_OPTIONS=--experimental-vm-modules npx jest ./src --watchAll",
     "start": "nodemon src/index.js"
   },
   "jest": {

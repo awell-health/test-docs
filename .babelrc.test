@@ -1,4 +1,4 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": ["./lib/index.js"]
+  "plugins": ["./dist/index.js"]
 }

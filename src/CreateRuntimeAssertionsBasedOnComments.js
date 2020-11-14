@@ -4,6 +4,7 @@ import template from '@babel/template'
  * Trims a string
  * t-examples:
  * - trim(' hello ') === 'hello'
+ * - trim('  ') === ''
  */
 const trim = s => s.trim()
 
@@ -50,7 +51,6 @@ export const CreateRuntimeAssertionsBasedOnComments = function({ types: t }) {
             if (node_has_test_example_comment(path.node)) {
               const comments = get_comment_values_from_node(path.node)
               const tests = comments.flatMap(comment_to_tests)
-              console.log('template',template)
               tests.reverse().forEach(test => {
                 path.insertAfter(template.ast(test))
               })
