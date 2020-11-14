@@ -8,19 +8,17 @@
     "build": "./node_modules/.bin/babel --config-file ./.babelrc.build src --out-dir dist",
     "test:doc-tests": "npm run build:doc-tests && node ./test/index.js",
     "test:e2e": "npm run build && ./node_modules/.bin/babel --config-file ./.babelrc.test test-dir --out-dir test-dir-o",
-    "test:jest": "NODE_OPTIONS=--experimental-vm-modules npx jest ./src --watchAll",
+    "test:jest": "jest ./src --watchAll",
     "start": "nodemon src/index.js"
   },
   "jest": {
-    "verbose": true,
-    "transform": {}
+    "verbose": true
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
     "@babel/node": "^7.12.6",
     "@babel/preset-env": "^7.12.1",
     "@babel/template": "^7.10.4",
@@ -28,6 +26,8 @@
   },
   "dependencies": {
     "@babel/template": "^7.10.4",
+    "@babel/core": "^7.12.3",
+    "babel-jest": "^26.6.3",
     "endent": "^2.0.1",
     "ramda": "^0.27.1",
     "yaml": "^1.10.0"

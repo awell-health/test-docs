@@ -1,9 +1,6 @@
 //@flow
-import _endent from 'endent'
+import endent from 'endent'
 import { clean_comment } from './CreateRuntimeAssertionsBasedOnComments'
-const endent = _endent.default
-
-
 
 test('clean_comment should remove leading comments', () => {
   const code = endent`
