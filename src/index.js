@@ -1,0 +1,2 @@
+import { CreateRuntimeAssertionsBasedOnComments } from './CreateRuntimeAssertionsBasedOnComments.js'
+export default CreateRuntimeAssertionsBasedOnComments

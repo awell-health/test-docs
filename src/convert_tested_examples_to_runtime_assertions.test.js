@@ -17,15 +17,15 @@ test('converts a simple example', () => {
   */
   const test = a => a + 1;
 
-  if (test(6) === 7 === false) {
-    throw new Error("'test(6) === 7' is violated");
-  }
-
   if (test(3) === 4 === false) {
     throw new Error("'test(3) === 4' is violated");
   }
+
+  if (test(6) === 7 === false) {
+    throw new Error("'test(6) === 7' is violated");
+  }
   `
-  expect(convert_tested_examples_to_runtime_assertions(code)).toBe(transformed_code)
+  expect(convert_tested_examples_to_runtime_assertions(code)).toEqual(transformed_code)
 })
 
 test('It should do nothing if there are no comments in the code', () => {

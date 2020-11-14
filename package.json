@@ -1,12 +1,14 @@
 {
   "name": "babel_inline_tests",
-  "type": "module",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll",
-    "start": "nodemon index.js"
+    "test:e2e": "npm run build && ./node_modules/.bin/babel --config-file ./.babelrc.test test-dir --out-dir test-dir-o",
+    "build": "./node_modules/.bin/babel --config-file ./.babelrc.build src --out-dir lib",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest ./src --watchAll",
+    "start": "nodemon src/index.js"
   },
   "jest": {
     "verbose": true,
@@ -18,6 +20,8 @@
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.1",
     "@babel/template": "^7.10.4",
     "jest": "^26.6.3"
   },
