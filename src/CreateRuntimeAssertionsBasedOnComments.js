@@ -10,9 +10,11 @@ const template = _template.default
 const trim = s => s.trim()
 
 const replaceAll = (old, _new) => s => s.replace(old,_new)
-const remove_js_comment_tokens = a_string => replaceAll(/\n\*(?!\/)/g, '\n')(a_string)
+const remove_js_comment_tokens = a_string => replaceAll(/\n(\s*)\*(?!\/)/g, '\n')(a_string)
+  .replace(/^\*/,'')
   .replace('/**', '')
   .replace('*/', '').trim()
+
 const extract_tests_from_test_comment = test_comment => {
   const lines = test_comment.split('\n')
   const is_a_bullet_line = l => l.trim().startsWith('- ')
