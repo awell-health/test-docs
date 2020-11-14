@@ -1,7 +1,6 @@
 {
   "name": "babel_inline_tests",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -26,6 +25,7 @@
     "jest": "^26.6.3"
   },
   "dependencies": {
+    "@babel/template": "^7.10.4",
     "endent": "^2.0.1",
     "ramda": "^0.27.1",
     "yaml": "^1.10.0"
