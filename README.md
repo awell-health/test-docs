@@ -1,6 +1,6 @@
 # documentation tests
 
-[TLDR video](https://www.loom.com/share/cd01312cf6e64700bbeb2c98733d0f43)
+<a href="https://www.loom.com/share/cd01312cf6e64700bbeb2c98733d0f43"> <p>test docs - Watch Video</p> <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/cd01312cf6e64700bbeb2c98733d0f43-with-play.gif"> </a>
 
 ## TLDR; why does this repository exist?
 
