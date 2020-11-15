@@ -1,5 +1,7 @@
 # documentation tests
 
+[TLDR video](https://www.loom.com/share/cd01312cf6e64700bbeb2c98733d0f43)
+
 ## TLDR; why does this repository exist?
 
 To make writing tests easier. 
