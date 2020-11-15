@@ -15,6 +15,7 @@ const trim = s => s.trim()
  * removes jsdoc comment characters from a string
  * t-examples:
  * - remove_js_comment_tokens('/** hello \n* world\n*\/') === 'hello \n world'
+ * - remove_js_comment_tokens('') === ''
  */
 const remove_js_comment_tokens = a_string => {
   const replaceAll = (old, _new) => s => s.replace(old,_new)
@@ -49,15 +50,17 @@ const remove_t_example_identifier = s => s.replace('t-examples:', '')
  *  - remove_leading_comments('hello t-examples: world') === 't-examples: world'
  *  - remove_leading_comments('hello t-examples: t-examples') === 't-examples: t-examples'
  *  - remove_leading_comments('') === ''
+ *  - remove_leading_comments('Comment') === 'Comment'
  */
 const remove_leading_comments = s => {
   const [_, ...rest] = s.split('t-examples:')
-  if(rest.length === 0) return ''
+  if(rest.length === 0) return s
   return `t-examples:${rest.join('t-examples:')}`
 }
 /**
  * t-examples:
  * - clean_comment('/** hello \n * t-examples: world \n*\/') === 'world'
+ * - clean_comment('') === ''
  */
 export const clean_comment = R.compose(
   trim,
@@ -67,21 +70,27 @@ export const clean_comment = R.compose(
 )
 
 /**
- * TODO: Finish adding examples. Tried but got compilation errors. Should create JS code using Babel instead my hacky attempt
+ * TODO: do this with babel
+ * TODO: Use R.equals or similar instead of JSON.stringify() === JSON.stringify()
+ * t-examples:
+ * - throw_if_false("1 === 1") === 'if((JSON.stringify(1) === JSON.stringify(1)) === false){ throw new Error(JSON.stringify(1) + \'=/=\' + JSON.stringify(1))}'
+ * - throw_if_false('') === ''
  */
 const throw_if_false = expression => {
   const [ left_side, right_side ] = extract_operands(expression)
+  if( left_side === '_COULD_NOT_EXTRACT_' && right_side === '_COULD_NOT_EXTRACT_'){ return '' }
   return `if((${stringify_operands(expression)}) === false){ throw new Error(JSON.stringify(${left_side}) + '=/=' + JSON.stringify(${right_side}))}`
 }
 
 /**
- * TODO: Finish adding examples. Tried but got compilation errors. Should create JS code using Babel instead my hacky attempt
  * t-examples:
  * - comment_to_tests('hello world') === []
  * - comment_to_tests(' - hello world') === []
  * - comment_to_tests('* - hello world') === []
+ * - comment_to_tests('/** test-examples:\n * - hello === world') === ["if((JSON.stringify(hello) === JSON.stringify(world)) === false){ throw new Error(JSON.stringify(hello) + '=/=' + JSON.stringify(world))}"]
  */
 export const comment_to_tests = comment => R.compose(
+  R.reject(R.equals('')),
   R.map(throw_if_false),
   extract_tests_from_test_comment,
   clean_comment
@@ -98,8 +107,11 @@ const is_test_comment = comment => comment.indexOf('t-examples') !== -1
 /**
  * t-examples:
  * - get_comment_nodes_from_node({leadingComments: [{a: 1}]}) === [{a:1}]
+ * - get_comment_nodes_from_node({}) === undefined
+ * - get_comment_nodes_from_node(undefined) === undefined
+ * - get_comment_nodes_from_node(1) === undefined
  */
-const get_comment_nodes_from_node = node => node.leadingComments
+const get_comment_nodes_from_node = (node = {}) => node.leadingComments
 
 /**
  * t-examples:
