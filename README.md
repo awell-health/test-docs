@@ -38,7 +38,8 @@ export const addOne = nbr => nbr + 1
 
 ## How to use
 
-This code base uses both Jest and "Documentation tests". Just run "npm run test:doc-tests"
+How to use guide still needs to be written. You can have a look how I used it for the project.
+Start at "npm run test:doc-tests" and go from there
 
 ## Reasoning 
 
