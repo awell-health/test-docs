@@ -1,5 +1,7 @@
 import R from 'ramda'
 import template from '@babel/template'
+import { stringify_operands } from './stringify_operands'
+import { extract_operands } from './extract_operands'
 
 /**
  * Trims a string
@@ -42,32 +44,33 @@ const extract_tests_from_test_comment = test_comment => {
 const remove_t_example_identifier = s => s.replace('t-examples:', '')
 
 /**
- *  TODO: write tests for this function. Tried and failed to write doc tests
+ *  t-examples:
+ *  - remove_leading_comments('h t-examples: w') === 't-examples: w'
+ *  - remove_leading_comments('hello t-examples: world') === 't-examples: world'
+ *  - remove_leading_comments('hello t-examples: t-examples') === 't-examples: t-examples'
+ *  - remove_leading_comments('') === ''
  */
 const remove_leading_comments = s => {
   const [_, ...rest] = s.split('t-examples:')
   if(rest.length === 0) return ''
   return `t-examples:${rest.join('t-examples:')}`
 }
+/**
+ * t-examples:
+ * - clean_comment('/** hello \n * t-examples: world \n*\/') === 'world'
+ */
 export const clean_comment = R.compose(
   trim,
   remove_t_example_identifier,
   remove_leading_comments,
   remove_js_comment_tokens
 )
-/**
- *  TODO: write tests for this function. Tried and failed to write doc tests
- */
-const stringify_operands = test_expression => {
-  const [ left_side, right_side ] = test_expression.split('===')
-  return `JSON.stringify(${left_side}) === JSON.stringify(${right_side})`
-}
 
 /**
  * TODO: Finish adding examples. Tried but got compilation errors. Should create JS code using Babel instead my hacky attempt
  */
 const throw_if_false = expression => {
-  const [ left_side, right_side ] = expression.split('===')
+  const [ left_side, right_side ] = extract_operands(expression)
   return `if((${stringify_operands(expression)}) === false){ throw new Error(JSON.stringify(${left_side}) + '=/=' + JSON.stringify(${right_side}))}`
 }
 
