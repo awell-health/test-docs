@@ -61,7 +61,7 @@ Also when you're writing tests it's nice to have the code close at hand to see w
 ## Note of caution 
 
 This is a proof-of-concept. There is a lot to be done. MRs welcome! 
-If you're interested to collaborate send an email at yann@awellhealth.com.
+If you're interested to collaborate send an email at yann@awellhealth.com or just create an MR.
 Biggest help is to get this tool to work with your project and tell me how you did. 
 
 Todos:
@@ -80,6 +80,8 @@ Todos:
 - Create a nice summary of the test run
 - have .only functionality like in Jest
 - Integrations with IDEs
+- turn this into an npm module 
+- Create a CI/CD pipeline for the project
 - prettify when test fails (e.g., make it clearer where the delta is with actual and expected output)
 - make it optional to write the function and change === to = (e.g, instead of `* - addOne(1) === 2` have `* - f(1) = 2` or `(1) => 2`) 
 
